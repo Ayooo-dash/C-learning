@@ -1,0 +1,12 @@
+E:\GZY\LearningProject\Winforms\bin\Release\Winforms.exe.config
+E:\GZY\LearningProject\Winforms\bin\Release\Winforms.exe
+E:\GZY\LearningProject\Winforms\bin\Release\Winforms.pdb
+E:\GZY\LearningProject\Winforms\obj\Release\Winforms.FileManagerForm.resources
+E:\GZY\LearningProject\Winforms\obj\Release\Winforms.LoginForm.resources
+E:\GZY\LearningProject\Winforms\obj\Release\Winforms.PicForm.resources
+E:\GZY\LearningProject\Winforms\obj\Release\Winforms.MainForm.resources
+E:\GZY\LearningProject\Winforms\obj\Release\Winforms.Properties.Resources.resources
+E:\GZY\LearningProject\Winforms\obj\Release\Winforms.XMLForm.resources
+E:\GZY\LearningProject\Winforms\obj\Release\Winforms.csproj.GenerateResource.Cache
+E:\GZY\LearningProject\Winforms\obj\Release\Winforms.exe
+E:\GZY\LearningProject\Winforms\obj\Release\Winforms.pdb

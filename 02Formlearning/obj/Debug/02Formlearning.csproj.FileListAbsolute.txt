@@ -1,0 +1,9 @@
+E:\GZY\DAY1\01learning\01learning\02Formlearning\bin\Debug\02Formlearning.exe.config
+E:\GZY\DAY1\01learning\01learning\02Formlearning\bin\Debug\02Formlearning.exe
+E:\GZY\DAY1\01learning\01learning\02Formlearning\bin\Debug\02Formlearning.pdb
+E:\GZY\DAY1\01learning\01learning\02Formlearning\obj\Debug\02Formlearning.csprojResolveAssemblyReference.cache
+E:\GZY\DAY1\01learning\01learning\02Formlearning\obj\Debug\_02Formlearning.Form1.resources
+E:\GZY\DAY1\01learning\01learning\02Formlearning\obj\Debug\_02Formlearning.Properties.Resources.resources
+E:\GZY\DAY1\01learning\01learning\02Formlearning\obj\Debug\02Formlearning.csproj.GenerateResource.Cache
+E:\GZY\DAY1\01learning\01learning\02Formlearning\obj\Debug\02Formlearning.exe
+E:\GZY\DAY1\01learning\01learning\02Formlearning\obj\Debug\02Formlearning.pdb

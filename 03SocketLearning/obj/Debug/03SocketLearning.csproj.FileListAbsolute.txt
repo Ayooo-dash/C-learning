@@ -1,0 +1,9 @@
+E:\GZY\DAY1\01learning\01learning\03SocketLearning\bin\Debug\03SocketLearning.exe.config
+E:\GZY\DAY1\01learning\01learning\03SocketLearning\bin\Debug\03SocketLearning.exe
+E:\GZY\DAY1\01learning\01learning\03SocketLearning\bin\Debug\03SocketLearning.pdb
+E:\GZY\DAY1\01learning\01learning\03SocketLearning\obj\Debug\03SocketLearning.csprojResolveAssemblyReference.cache
+E:\GZY\DAY1\01learning\01learning\03SocketLearning\obj\Debug\_03SocketLearning.Form1.resources
+E:\GZY\DAY1\01learning\01learning\03SocketLearning\obj\Debug\_03SocketLearning.Properties.Resources.resources
+E:\GZY\DAY1\01learning\01learning\03SocketLearning\obj\Debug\03SocketLearning.csproj.GenerateResource.Cache
+E:\GZY\DAY1\01learning\01learning\03SocketLearning\obj\Debug\03SocketLearning.exe
+E:\GZY\DAY1\01learning\01learning\03SocketLearning\obj\Debug\03SocketLearning.pdb

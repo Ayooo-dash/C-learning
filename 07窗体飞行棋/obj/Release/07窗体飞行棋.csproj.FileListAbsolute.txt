@@ -1,0 +1,9 @@
+E:\GZY\01learning\07窗体飞行棋\bin\Release\_07窗体飞行棋.exe.config
+E:\GZY\01learning\07窗体飞行棋\bin\Release\_07窗体飞行棋.exe
+E:\GZY\01learning\07窗体飞行棋\bin\Release\_07窗体飞行棋.pdb
+E:\GZY\01learning\07窗体飞行棋\obj\Release\_07窗体飞行棋.StartForm.resources
+E:\GZY\01learning\07窗体飞行棋\obj\Release\_07窗体飞行棋.GameForm.resources
+E:\GZY\01learning\07窗体飞行棋\obj\Release\_07窗体飞行棋.Properties.Resources.resources
+E:\GZY\01learning\07窗体飞行棋\obj\Release\07窗体飞行棋.csproj.GenerateResource.Cache
+E:\GZY\01learning\07窗体飞行棋\obj\Release\_07窗体飞行棋.exe
+E:\GZY\01learning\07窗体飞行棋\obj\Release\_07窗体飞行棋.pdb
