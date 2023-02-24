@@ -1,0 +1,6 @@
+E:\GZY\LearningProject\11GzipStream\bin\Debug\11GzipStream.exe.config
+E:\GZY\LearningProject\11GzipStream\bin\Debug\11GzipStream.exe
+E:\GZY\LearningProject\11GzipStream\bin\Debug\11GzipStream.pdb
+E:\GZY\LearningProject\11GzipStream\obj\Debug\11GzipStream.exe
+E:\GZY\LearningProject\11GzipStream\obj\Debug\11GzipStream.pdb
+E:\GZY\LearningProject\11GzipStream\obj\Debug\11GzipStream.csprojResolveAssemblyReference.cache

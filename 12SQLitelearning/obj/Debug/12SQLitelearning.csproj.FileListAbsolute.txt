@@ -1,0 +1,10 @@
+E:\GZY\LearningProject\12SQLitelearning\bin\Debug\12SQLitelearning.exe.config
+E:\GZY\LearningProject\12SQLitelearning\bin\Debug\12SQLitelearning.exe
+E:\GZY\LearningProject\12SQLitelearning\bin\Debug\12SQLitelearning.pdb
+E:\GZY\LearningProject\12SQLitelearning\obj\Debug\_12SQLitelearning.Properties.Resources.resources
+E:\GZY\LearningProject\12SQLitelearning\obj\Debug\_12SQLitelearning.SQLiteForm.resources
+E:\GZY\LearningProject\12SQLitelearning\obj\Debug\12SQLitelearning.csproj.GenerateResource.Cache
+E:\GZY\LearningProject\12SQLitelearning\obj\Debug\12SQLitelearning.exe
+E:\GZY\LearningProject\12SQLitelearning\obj\Debug\12SQLitelearning.pdb
+E:\GZY\LearningProject\12SQLitelearning\obj\Debug\12SQLitelearning.csprojResolveAssemblyReference.cache
+E:\GZY\LearningProject\12SQLitelearning\obj\Debug\_12SQLitelearning.SQLiteDataAddForm.resources

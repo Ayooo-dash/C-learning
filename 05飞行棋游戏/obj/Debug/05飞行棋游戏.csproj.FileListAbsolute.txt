@@ -1,0 +1,16 @@
+E:\GZY\DAY1\01learning\01learning\05飞行棋游戏\bin\Debug\05飞行棋游戏.exe.config
+E:\GZY\DAY1\01learning\01learning\05飞行棋游戏\bin\Debug\05飞行棋游戏.exe
+E:\GZY\DAY1\01learning\01learning\05飞行棋游戏\bin\Debug\05飞行棋游戏.pdb
+E:\GZY\DAY1\01learning\01learning\05飞行棋游戏\obj\Debug\05飞行棋游戏.exe
+E:\GZY\DAY1\01learning\01learning\05飞行棋游戏\obj\Debug\05飞行棋游戏.pdb
+E:\GZY\DAY1\01learning\01learning\05飞行棋游戏\obj\Debug\05飞行棋游戏.csprojResolveAssemblyReference.cache
+E:\GZY\01learning\05飞行棋游戏\bin\Debug\05飞行棋游戏.exe.config
+E:\GZY\01learning\05飞行棋游戏\bin\Debug\05飞行棋游戏.exe
+E:\GZY\01learning\05飞行棋游戏\bin\Debug\05飞行棋游戏.pdb
+E:\GZY\01learning\05飞行棋游戏\obj\Debug\05飞行棋游戏.exe
+E:\GZY\01learning\05飞行棋游戏\obj\Debug\05飞行棋游戏.pdb
+E:\GZY\LearningProject\05飞行棋游戏\bin\Debug\05飞行棋游戏.exe.config
+E:\GZY\LearningProject\05飞行棋游戏\bin\Debug\05飞行棋游戏.exe
+E:\GZY\LearningProject\05飞行棋游戏\bin\Debug\05飞行棋游戏.pdb
+E:\GZY\LearningProject\05飞行棋游戏\obj\Debug\05飞行棋游戏.exe
+E:\GZY\LearningProject\05飞行棋游戏\obj\Debug\05飞行棋游戏.pdb

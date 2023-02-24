@@ -1,0 +1,16 @@
+E:\GZY\DAY1\01learning\01learning\01learning\bin\Debug\01learning.exe.config
+E:\GZY\DAY1\01learning\01learning\01learning\bin\Debug\01learning.exe
+E:\GZY\DAY1\01learning\01learning\01learning\bin\Debug\01learning.pdb
+E:\GZY\DAY1\01learning\01learning\01learning\obj\Debug\01learning.exe
+E:\GZY\DAY1\01learning\01learning\01learning\obj\Debug\01learning.pdb
+E:\GZY\DAY1\01learning\01learning\01learning\obj\Debug\01learning.csprojResolveAssemblyReference.cache
+E:\GZY\01learning\01learning\bin\Debug\01learning.exe.config
+E:\GZY\01learning\01learning\obj\Debug\01learning.exe
+E:\GZY\01learning\01learning\obj\Debug\01learning.pdb
+E:\GZY\01learning\01learning\bin\Debug\01learning.exe
+E:\GZY\01learning\01learning\bin\Debug\01learning.pdb
+E:\GZY\LearningProject\01learning\bin\Debug\01learning.exe.config
+E:\GZY\LearningProject\01learning\bin\Debug\01learning.exe
+E:\GZY\LearningProject\01learning\bin\Debug\01learning.pdb
+E:\GZY\LearningProject\01learning\obj\Debug\01learning.exe
+E:\GZY\LearningProject\01learning\obj\Debug\01learning.pdb
