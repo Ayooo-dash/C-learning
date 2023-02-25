@@ -23,4 +23,3 @@ E:\GZY\LearningProject\02Formlearning\obj\Debug\_02Formlearning.Properties.Resou
 E:\GZY\LearningProject\02Formlearning\obj\Debug\02LoginFormlearning.csproj.GenerateResource.Cache
 E:\GZY\LearningProject\02Formlearning\obj\Debug\02Formlearning.exe
 E:\GZY\LearningProject\02Formlearning\obj\Debug\02Formlearning.pdb
-E:\GZY\LearningProject\02Formlearning\obj\Debug\02LoginFormlearning.csprojResolveAssemblyReference.cache

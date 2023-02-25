@@ -987,6 +987,34 @@ namespace _12SQLitelearning
             }
         }
 
+        public SQLiteRowData this[int index, string ColumnName]
+        {
+            get
+            {
+                if (index < 0 || index >= rows.Count)
+                    throw new Exception("索引不能小于0或大于等于行数");
+                if (ColumnName == null || ColumnName == string.Empty)
+                    throw new Exception("索引名称不能为空");
+                return (from r in rows[index] where r.Name == ColumnName select r).FirstOrDefault();
+            }
+            set
+            {
+                if (index < 0 || index >= rows.Count)
+                    throw new Exception("索引不能小于0或大于等于行数");
+                if (ColumnName == null || ColumnName == string.Empty)
+                    throw new Exception("索引名称不能为空");
+                foreach (var r in rows[index])
+                {
+                    if (r.Name == ColumnName)
+                    {
+                        r.Name = value.Name;
+                        r.Value = value.Value;
+                        r.Type = value.Type;
+                    }
+                }
+            }
+        }
+
         public int Count
         {
             get

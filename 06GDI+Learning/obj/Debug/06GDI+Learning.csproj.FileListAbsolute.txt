@@ -30,4 +30,3 @@ E:\GZY\LearningProject\06GDI+Learning\obj\Debug\_06GDI_Learning.Properties.Resou
 E:\GZY\LearningProject\06GDI+Learning\obj\Debug\06GDI+Learning.csproj.GenerateResource.Cache
 E:\GZY\LearningProject\06GDI+Learning\obj\Debug\06GDI+Learning.exe
 E:\GZY\LearningProject\06GDI+Learning\obj\Debug\06GDI+Learning.pdb
-E:\GZY\LearningProject\06GDI+Learning\obj\Debug\06GDI+Learning.csprojResolveAssemblyReference.cache

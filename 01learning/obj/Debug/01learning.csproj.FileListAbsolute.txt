@@ -14,3 +14,4 @@ E:\GZY\LearningProject\01learning\bin\Debug\01learning.exe
 E:\GZY\LearningProject\01learning\bin\Debug\01learning.pdb
 E:\GZY\LearningProject\01learning\obj\Debug\01learning.exe
 E:\GZY\LearningProject\01learning\obj\Debug\01learning.pdb
+E:\GZY\LearningProject\01learning\obj\Debug\01learning.csprojResolveAssemblyReference.cache

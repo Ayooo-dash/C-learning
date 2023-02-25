@@ -23,4 +23,3 @@ E:\GZY\LearningProject\03SocketLearning\obj\Debug\_03SocketLearning.Properties.R
 E:\GZY\LearningProject\03SocketLearning\obj\Debug\03SocketServerLearning.csproj.GenerateResource.Cache
 E:\GZY\LearningProject\03SocketLearning\obj\Debug\03SocketLearning.exe
 E:\GZY\LearningProject\03SocketLearning\obj\Debug\03SocketLearning.pdb
-E:\GZY\LearningProject\03SocketLearning\obj\Debug\03SocketServerLearning.csprojResolveAssemblyReference.cache

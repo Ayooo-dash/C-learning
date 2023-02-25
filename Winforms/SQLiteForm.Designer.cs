@@ -47,6 +47,7 @@
             this.txtID = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.btnEditIDData = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btn_ConnectDB
@@ -224,11 +225,22 @@
             this.btnEditIDData.UseVisualStyleBackColor = true;
             this.btnEditIDData.Click += new System.EventHandler(this.btnEditIDData_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(593, 111);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(102, 23);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "查询数据";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // SQLiteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(949, 587);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.btnEditIDData);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.txtID);
@@ -278,5 +290,6 @@
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.Button btnEditIDData;
+        private System.Windows.Forms.Button button1;
     }
 }

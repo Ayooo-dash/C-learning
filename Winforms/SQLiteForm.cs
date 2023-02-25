@@ -20,7 +20,7 @@ namespace Winforms
         private Dictionary<object, string> m_dicValue = new Dictionary<object, string>();
         private Dictionary<string, List<string>> m_dicTable = new Dictionary<string, List<string>>();
         private Dictionary<string, List<Dictionary<string, string>>> m_dicRowData = new Dictionary<string, List<Dictionary<string, string>>>();
-
+        private List<DataTable> m_listDataTable = new List<DataTable>();
         private static string FilePath;
 
         /// <summary>
@@ -217,46 +217,61 @@ namespace Winforms
             {
                 if (Conn != null && Conn.State == ConnectionState.Open)
                 {
+                    //string sql = "SELECT name FROM sqlite_master WHERE type='table' order by name";
+                    //SQLiteCommand command = new SQLiteCommand(sql, Conn);
+                    //m_dicTable.Clear();
+                    //m_dicRowData.Clear();
+                    //using (SQLiteDataReader reader = command.ExecuteReader())
+                    //{
+                    //    while (reader.Read())
+                    //    {
+                    //        string ret = "";
+                    //        ret = reader.GetValue(0).ToString();
+                    //        m_dicTable.Add(ret, new List<string>());
+                    //        m_dicRowData.Add(ret, new List<Dictionary<string, string>>());
+                    //    }
+
+                    //}
                     string sql = "SELECT name FROM sqlite_master WHERE type='table' order by name";
                     SQLiteCommand command = new SQLiteCommand(sql, Conn);
-                    m_dicTable.Clear();
-                    m_dicRowData.Clear();
+                    m_listDataTable.Clear();
                     using (SQLiteDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
                             string ret = "";
                             ret = reader.GetValue(0).ToString();
-                            m_dicTable.Add(ret, new List<string>());
-                            m_dicRowData.Add(ret, new List<Dictionary<string, string>>());
+                            DataTable dt = new DataTable(ret);
+                            m_listDataTable.Add(dt);
                         }
-
                     }
                     tabControl1.TabPages.Clear();
-                    foreach (var l in m_dicTable.Keys)
+                    for (int i =0;i<m_listDataTable.Count;i++)
                     {
                         DataGridView dgv = new DataGridView();
                         dgv.Dock = DockStyle.Fill;
                         dgv.AllowUserToAddRows = false;
                         dgv.RowHeadersVisible = false;
                         dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                        TabPage tp = new TabPage(l);
+                        TabPage tp = new TabPage(m_listDataTable[i].TableName);
                         tp.Controls.Add(dgv);
                         tabControl1.TabPages.Add(tp);
-                        LoadTableData(l);
-                        foreach (var d in m_dicTable[l])
+                        DataTable temp = new DataTable(m_listDataTable[i].TableName);
+                        LoadTableData(ref temp);
+                        m_listDataTable[i] = temp;
+                        foreach (DataColumn d in m_listDataTable[i].Columns)
                         {
                             DataGridViewColumn dgvc = new DataGridViewColumn();
                             DataGridViewCell dgvct = new DataGridViewTextBoxCell();
-                            dgvc.HeaderText = d;
-                            dgvc.Name = d;
+                            dgvc.HeaderText = d.ColumnName;
+                            dgvc.Name = d.ColumnName;
                             dgvc.CellTemplate = dgvct;
                             int index = dgv.Columns.Add(dgvc);
                         }
-                        foreach (var row in m_dicRowData[l])
+                        foreach (DataRow row in m_listDataTable[i].Rows)
                         {
                             int index = dgv.Rows.Add();
-                            dgv.Rows[index].SetValues(row.Values.ToArray());
+                            dgv.Rows[index].SetValues(row.ItemArray);
                         }
                     }
                 }
@@ -267,36 +282,64 @@ namespace Winforms
             }
         }
 
-        private void LoadTableData(string table)
+        private void LoadTableData(ref DataTable dt)
         {
+            string sql = "";
+            SQLiteCommand command;
             try
             {
-                string sql = $"pragma table_info({table})";
-                SQLiteCommand command = new SQLiteCommand(sql, Conn);
-                m_dicTable[table].Clear();
+                //string sql = $"pragma table_info({table})";
+                //SQLiteCommand command = new SQLiteCommand(sql, Conn);
+                //m_dicTable[table].Clear();
+                //using (SQLiteDataReader reader = command.ExecuteReader())
+                //{
+                //    while (reader.Read())
+                //    {
+                //        m_dicTable[table].Add(reader.GetValue(1).ToString());
+                //    }
+
+                //}
+
+                //string sql1 = $"select * from {table}";
+                //SQLiteCommand command1 = new SQLiteCommand(sql1, Conn);
+                //using (SQLiteDataReader reader = command1.ExecuteReader())
+                //{
+                //    while (reader.Read())
+                //    {
+                //        Dictionary<string, string> dic = new Dictionary<string, string>();
+                //        foreach (var d in m_dicTable[table])
+                //        {
+                //            string ret = "";
+                //            dic.Add(d, reader[d].ToString());
+                //            ret = reader[d].ToString();
+                //        }
+                //        m_dicRowData[table].Add(dic);
+                //    }
+                //}
+                //foreach (var dt in m_listDataTable)
+                //{
+                sql = $"pragma table_info({dt.TableName})";
+                command = new SQLiteCommand(sql, Conn);
                 using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        m_dicTable[table].Add(reader.GetValue(1).ToString());
+                        dt.Columns.Add(reader.GetValue(1).ToString());
                     }
-
                 }
-
-                string sql1 = $"select * from {table}";
-                SQLiteCommand command1 = new SQLiteCommand(sql1, Conn);
-                using (SQLiteDataReader reader = command1.ExecuteReader())
+                sql = $"select * from {dt.TableName}";
+                command = new SQLiteCommand(sql, Conn);
+                using (SQLiteDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        Dictionary<string, string> dic = new Dictionary<string, string>();
-                        foreach (var d in m_dicTable[table])
+                        List<object> dr = new List<object>();
+                        foreach (DataColumn d in dt.Columns)
                         {
-                            string ret = "";
-                            dic.Add(d, reader[d].ToString());
-                            ret = reader[d].ToString();
+                            object ret = reader[d.ColumnName];
+                            dr.Add(ret);
                         }
-                        m_dicRowData[table].Add(dic);
+                        dt.Rows.Add(dr.ToArray());
                     }
                 }
             }
@@ -318,6 +361,55 @@ namespace Winforms
             catch (Exception ex)
             {
 
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string sql = "";
+            SQLiteCommand command;
+            if (Conn != null && Conn.State == ConnectionState.Open)
+            {
+                sql = "SELECT name FROM sqlite_master WHERE type='table' order by name";
+                command = new SQLiteCommand(sql, Conn);
+                using (SQLiteDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string ret = "";
+                        ret = reader.GetValue(0).ToString();
+                        DataTable dt = new DataTable(ret);
+                        m_listDataTable.Add(dt);
+                    }
+                }
+
+                foreach (var dt in m_listDataTable)
+                {
+                    sql = $"pragma table_info({dt.TableName})";
+                    command = new SQLiteCommand(sql, Conn);
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            dt.Columns.Add(reader.GetValue(1).ToString());
+                        }
+                    }
+                    sql = $"select * from {dt.TableName}";
+                    command = new SQLiteCommand(sql, Conn);
+                    using (SQLiteDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            List<object> dr = new List<object>();
+                            foreach (DataColumn d in dt.Columns)
+                            {
+                                object ret = reader[d.ColumnName];
+                                dr.Add(ret);
+                            }
+                            dt.Rows.Add(dr.ToArray());
+                        }
+                    }
+                }
             }
         }
     }
