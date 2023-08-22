@@ -15,11 +15,11 @@ E:\GZY\01learning\03SocketLearning\obj\Debug\_03SocketLearning.Properties.Resour
 E:\GZY\01learning\03SocketLearning\obj\Debug\03SocketServerLearning.csproj.GenerateResource.Cache
 E:\GZY\01learning\03SocketLearning\obj\Debug\03SocketLearning.exe
 E:\GZY\01learning\03SocketLearning\obj\Debug\03SocketLearning.pdb
-E:\GZY\LearningProject\03SocketLearning\bin\Debug\03SocketLearning.exe.config
-E:\GZY\LearningProject\03SocketLearning\bin\Debug\03SocketLearning.exe
 E:\GZY\LearningProject\03SocketLearning\bin\Debug\03SocketLearning.pdb
 E:\GZY\LearningProject\03SocketLearning\obj\Debug\_03SocketLearning.Form1.resources
 E:\GZY\LearningProject\03SocketLearning\obj\Debug\_03SocketLearning.Properties.Resources.resources
 E:\GZY\LearningProject\03SocketLearning\obj\Debug\03SocketServerLearning.csproj.GenerateResource.Cache
-E:\GZY\LearningProject\03SocketLearning\obj\Debug\03SocketLearning.exe
 E:\GZY\LearningProject\03SocketLearning\obj\Debug\03SocketLearning.pdb
+E:\GZY\LearningProject\03SocketLearning\bin\Debug\03SocketLearning.exe.config
+E:\GZY\LearningProject\03SocketLearning\bin\Debug\03SocketLearning.exe
+E:\GZY\LearningProject\03SocketLearning\obj\Debug\03SocketLearning.exe

@@ -6,5 +6,6 @@ E:\GZY\LearningProject\12SQLitelearning\obj\Debug\_12SQLitelearning.SQLiteForm.r
 E:\GZY\LearningProject\12SQLitelearning\obj\Debug\12SQLitelearning.csproj.GenerateResource.Cache
 E:\GZY\LearningProject\12SQLitelearning\obj\Debug\12SQLitelearning.exe
 E:\GZY\LearningProject\12SQLitelearning\obj\Debug\12SQLitelearning.pdb
-E:\GZY\LearningProject\12SQLitelearning\obj\Debug\12SQLitelearning.csprojResolveAssemblyReference.cache
 E:\GZY\LearningProject\12SQLitelearning\obj\Debug\_12SQLitelearning.SQLiteDataAddForm.resources
+E:\GZY\LearningProject\12SQLitelearning\obj\Debug\12SQLitelearning.csprojResolveAssemblyReference.cache
+E:\GZY\LearningProject\12SQLitelearning\bin\Debug\System.Data.SQLite.dll

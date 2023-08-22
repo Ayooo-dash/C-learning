@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Winforms", "Winforms\Winfor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "12SQLitelearning", "12SQLitelearning\12SQLitelearning.csproj", "{B10F3524-421B-4D36-B087-82FBE2680129}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "13QueueLearning", "13QueueLearning\13QueueLearning.csproj", "{0297704E-6AF8-4E55-AD24-645272E25532}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{B10F3524-421B-4D36-B087-82FBE2680129}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B10F3524-421B-4D36-B087-82FBE2680129}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B10F3524-421B-4D36-B087-82FBE2680129}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0297704E-6AF8-4E55-AD24-645272E25532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0297704E-6AF8-4E55-AD24-645272E25532}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0297704E-6AF8-4E55-AD24-645272E25532}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0297704E-6AF8-4E55-AD24-645272E25532}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

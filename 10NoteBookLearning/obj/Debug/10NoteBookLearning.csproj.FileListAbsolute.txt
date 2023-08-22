@@ -8,14 +8,11 @@ E:\GZY\01learning\10NoteBookLearning\obj\Debug\10NoteBookLearning.pdb
 E:\GZY\01learning\10NoteBookLearning\obj\Debug\_10NoteBookLearning.Main_Form.resources
 E:\GZY\01learning\10NoteBookLearning\obj\Debug\_10NoteBookLearning.About_Form.resources
 E:\GZY\01learning\10NoteBookLearning\obj\Debug\10NoteBookLearning.csprojResolveAssemblyReference.cache
-E:\GZY\LearningProject\10NoteBookLearning\bin\Debug\10NoteBookLearning.exe.config
-E:\GZY\LearningProject\10NoteBookLearning\bin\Debug\10NoteBookLearning.exe
 E:\GZY\LearningProject\10NoteBookLearning\bin\Debug\10NoteBookLearning.pdb
 E:\GZY\LearningProject\10NoteBookLearning\obj\Debug\_10NoteBookLearning.About_Form.resources
 E:\GZY\LearningProject\10NoteBookLearning\obj\Debug\_10NoteBookLearning.Main_Form.resources
 E:\GZY\LearningProject\10NoteBookLearning\obj\Debug\_10NoteBookLearning.Properties.Resources.resources
 E:\GZY\LearningProject\10NoteBookLearning\obj\Debug\10NoteBookLearning.csproj.GenerateResource.Cache
-E:\GZY\LearningProject\10NoteBookLearning\obj\Debug\10NoteBookLearning.exe
 E:\GZY\LearningProject\10NoteBookLearning\obj\Debug\10NoteBookLearning.pdb
 E:\GZY\LearningProject\10NoteBookLearning\bin\Debug\Interop.SystemMonitor.dll
 E:\GZY\LearningProject\10NoteBookLearning\bin\Debug\AxInterop.SystemMonitor.dll
@@ -31,3 +28,6 @@ E:\GZY\LearningProject\10NoteBookLearning\bin\Debug\System.Data.SQLite.dll
 E:\GZY\LearningProject\10NoteBookLearning\bin\Debug\System.Data.SQLite.EF6.dll
 E:\GZY\LearningProject\10NoteBookLearning\bin\Debug\System.Data.SQLite.Linq.dll
 E:\GZY\LearningProject\10NoteBookLearning\obj\Debug\10NoteBookLearning.csprojResolveAssemblyReference.cache
+E:\GZY\LearningProject\10NoteBookLearning\bin\Debug\10NoteBookLearning.exe.config
+E:\GZY\LearningProject\10NoteBookLearning\bin\Debug\10NoteBookLearning.exe
+E:\GZY\LearningProject\10NoteBookLearning\obj\Debug\10NoteBookLearning.exe

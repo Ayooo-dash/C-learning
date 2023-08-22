@@ -33,7 +33,7 @@ namespace _03SocketLearning
         private void btnStart_Click(object sender, EventArgs e)
         {
             socketwatch = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            ip = IPAddress.Parse(cbIPAddress.SelectedItem.ToString());//Any;
+            ip = IPAddress.Parse(cbIPAddress.Text);//Any;
             point = new IPEndPoint(ip, Convert.ToInt32(txtPort.Text));
             if (lbState.Text.Contains("未监听"))
             {
@@ -175,7 +175,10 @@ namespace _03SocketLearning
                         str = Encoding.UTF8.GetString(BufferList.ToArray(), 1, BufferList.Count - 1);
                         txtReceive.Text = txtReceive.Text + socket.RemoteEndPoint.ToString() + "：" + str + "\r\n";
                         if (str.Contains("Disconnect"))
+                        {
                             cbbConnected.Items.Remove(socket.RemoteEndPoint.ToString());
+                            socket = socketwatch.Accept();
+                        }
                     }
                     else if (BufferList[0] == 1)
                     {

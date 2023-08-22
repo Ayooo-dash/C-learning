@@ -1,0 +1,8 @@
+E:\GZY\LearningProject\13QueueLearning\bin\Debug\13QueueLearning.exe.config
+E:\GZY\LearningProject\13QueueLearning\bin\Debug\13QueueLearning.exe
+E:\GZY\LearningProject\13QueueLearning\bin\Debug\13QueueLearning.pdb
+E:\GZY\LearningProject\13QueueLearning\obj\Debug\_13QueueLearning.MainForm.resources
+E:\GZY\LearningProject\13QueueLearning\obj\Debug\_13QueueLearning.Properties.Resources.resources
+E:\GZY\LearningProject\13QueueLearning\obj\Debug\13QueueLearning.csproj.GenerateResource.Cache
+E:\GZY\LearningProject\13QueueLearning\obj\Debug\13QueueLearning.exe
+E:\GZY\LearningProject\13QueueLearning\obj\Debug\13QueueLearning.pdb

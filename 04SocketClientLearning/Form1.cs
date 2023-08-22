@@ -31,7 +31,7 @@ namespace _04SocketClientLearning
             if (lbConnectState.Text.Contains("未连接") | lbConnectState.Text.Contains("断开连接"))
             {
                 socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                ip = IPAddress.Parse(cbIPAddress.SelectedItem.ToString());
+                ip = IPAddress.Parse(cbIPAddress.Text);
                 point = new IPEndPoint(ip, Convert.ToInt32(txtPort.Text));
                 try
                 {
@@ -76,6 +76,8 @@ namespace _04SocketClientLearning
             if (lbConnectState.Text.Contains("已连接"))
             {
                 socket.Send(RebuildBuf(0, "Disconnected!"));
+                th.Abort();
+                th = null;
                 socket.Close();
                 //socket.Disconnect(true);
                 lbConnectState.Text = "连接状态：断开连接";

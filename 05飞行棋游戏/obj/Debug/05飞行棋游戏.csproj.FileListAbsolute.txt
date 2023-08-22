@@ -14,4 +14,3 @@ E:\GZY\LearningProject\05飞行棋游戏\bin\Debug\05飞行棋游戏.exe
 E:\GZY\LearningProject\05飞行棋游戏\bin\Debug\05飞行棋游戏.pdb
 E:\GZY\LearningProject\05飞行棋游戏\obj\Debug\05飞行棋游戏.exe
 E:\GZY\LearningProject\05飞行棋游戏\obj\Debug\05飞行棋游戏.pdb
-E:\GZY\LearningProject\05飞行棋游戏\obj\Debug\05飞行棋游戏.csprojResolveAssemblyReference.cache

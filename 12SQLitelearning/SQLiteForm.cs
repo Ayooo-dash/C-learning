@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
 using System.Data.SQLite;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApplication1;
 
 namespace _12SQLitelearning
 {
@@ -58,9 +52,13 @@ namespace _12SQLitelearning
 
         private void btnQueryData_Click(object sender, EventArgs e)
         {
+            //string table = "";
+            //SQLiteDataAdapter mAdapter = new SQLiteDataAdapter($"select * from {table}", m_mySQLiteDBData.SqlConnection);
+            //DataTable dt = new DataTable();
+            //mAdapter.Fill(dt);
             if (m_mySQLiteDBData == null)
                 return;
-            m_mySQLiteDBData.AddDBDataToTabControl(tabControl1);
+            m_mySQLiteDBData.AddDBDataToTabControl(panel_DBData);
         }
     }
 
@@ -71,7 +69,7 @@ namespace _12SQLitelearning
         public string FilePath;
         private int m_TabControlSelectIndex = 0;
         private SQLiteConnection m_sqlConnection;
-        private TabControl m_tabControl;
+        private Panel m_Panel;
         private Dictionary<string, List<int[]>> m_dicEditIndex;
         private Dictionary<string, MyTableData> m_dicTableData = new Dictionary<string, MyTableData>();
         private Dictionary<string, MyTableData> m_dicTableTempData = new Dictionary<string, MyTableData>();
@@ -102,6 +100,14 @@ namespace _12SQLitelearning
             FilePath = filePath;
         }
 
+        public SQLiteConnection SqlConnection
+        {
+            get
+            {
+                return m_sqlConnection;
+            }
+        }
+
         public bool ConnectDB()
         {
             m_dicBtn.Clear();
@@ -114,18 +120,18 @@ namespace _12SQLitelearning
             m_dicBtn.Add(new string[] { "btnDeleteColumn", "删除列" }, BtnDeleteColumn_Click);
             m_dicBtn.Add(new string[] { "btnUpdate", "更新数据" }, BtnUpdate_Click);
 
-            m_tabControl = new TabControl();
-            m_tabControl.Dock = DockStyle.Fill;
-            m_tabControl.Name = "m_tabControl";
-            m_tabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
-
             if (!File.Exists(FilePath))
             {
                 SQLiteConnection.CreateFile(FilePath);
             }
             try
             {
-                m_sqlConnection = new SQLiteConnection("Data Source=" + FilePath + ";Version=3;");
+                m_sqlConnection = new SQLiteConnection();
+                SQLiteConnectionStringBuilder connsb = new SQLiteConnectionStringBuilder();
+                connsb.DataSource = FilePath;
+                connsb.Version = 3;
+                //connsb.Password = "Wcf2019";
+                m_sqlConnection.ConnectionString = connsb.ToString();
                 m_sqlConnection.Open();
                 MessageBox.Show("数据库：\"" + FilePath + "\" 打开成功！");
             }
@@ -218,6 +224,7 @@ namespace _12SQLitelearning
             SQLiteCommand command;
             SQLiteDataAddForm addForm;
             DataGridView dgv;
+            TabControl tabControl = (from Control d in m_Panel.Controls where d is TabControl select d).FirstOrDefault() as TabControl;
             switch (cmd)
             {
                 case SqliteCmd.getTableName:    //查找该数据库的所有表
@@ -260,6 +267,7 @@ namespace _12SQLitelearning
                     {
                         sql = $"select * from {t.m_tableName}";
                         command = new SQLiteCommand(sql, m_sqlConnection);
+
                         using (SQLiteDataReader reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -312,12 +320,13 @@ namespace _12SQLitelearning
                     TabPage tpp1;
                     string tNewName = "";
                     addForm = new SQLiteDataAddForm(AddStep.RenameTable);
+                    tabControl = (from Control d in m_Panel.Controls where d is TabControl select d).FirstOrDefault() as TabControl;
                     if (addForm.ShowDialog() == DialogResult.OK)
                     {
                         try
                         {
                             tNewName = addForm.m_NewTableName;
-                            tpp1 = m_tabControl.SelectedTab;
+                            tpp1 = tabControl.SelectedTab;
                             tName = tpp1.Text;
                             sql = $"alter table {tName} rename to {tNewName}";
                             command = new SQLiteCommand(sql, m_sqlConnection);
@@ -341,7 +350,7 @@ namespace _12SQLitelearning
                     TabPage tpp;
                     try
                     {
-                        tpp = m_tabControl.SelectedTab;
+                        tpp = tabControl.SelectedTab;
                         tName = tpp.Text;
                         sql = $"drop table {tName}";
                         command = new SQLiteCommand(sql, m_sqlConnection);
@@ -353,12 +362,12 @@ namespace _12SQLitelearning
                     }
                     m_dicTableData.Remove(tName);
                     m_dicTableTempData.Remove(tName);
-                    m_tabControl.TabPages.Remove(tpp);
+                    tabControl.TabPages.Remove(tpp);
                     MessageBox.Show($"删除数据表{tName}成功！");
                     break;
 
                 case SqliteCmd.insertRowData:   //插入数据
-                    tName = m_tabControl.SelectedTab.Text;
+                    tName = tabControl.SelectedTab.Text;
                     MyTableDataRowCollection AddRowCollection = new MyTableDataRowCollection();
                     var rowTemplate = m_dicTableTempData[tName].Rows.RowTemplate;
                     addForm = new SQLiteDataAddForm(AddStep.InsertRow, rowTemplate);
@@ -390,7 +399,7 @@ namespace _12SQLitelearning
                                 command.ExecuteNonQuery();
                                 m_dicTableData[tName].Rows.Add(item);
                                 m_dicTableTempData[tName].Rows.Add(item);
-                                dgv = (from Control d in m_tabControl.SelectedTab.Controls where d is DataGridView select d).FirstOrDefault() as DataGridView;
+                                dgv = (from Control d in tabControl.SelectedTab.Controls where d is DataGridView select d).FirstOrDefault() as DataGridView;
                                 dgv.Rows.Add((from s in item select s.Value).ToArray());
                             }
                         }
@@ -403,8 +412,8 @@ namespace _12SQLitelearning
                     break;
 
                 case SqliteCmd.deleteRowData:   //删除行数据
-                    tName = m_tabControl.SelectedTab.Text;
-                    dgv = (from Control d in m_tabControl.SelectedTab.Controls where d is DataGridView select d).FirstOrDefault() as DataGridView;
+                    tName = tabControl.SelectedTab.Text;
+                    dgv = (from Control d in tabControl.SelectedTab.Controls where d is DataGridView select d).FirstOrDefault() as DataGridView;
                     index = dgv.CurrentRow.Index;
                     var id = m_dicTableTempData[tName].Rows[index][0];
                     try
@@ -430,7 +439,7 @@ namespace _12SQLitelearning
                 case SqliteCmd.updateTableData: //更新该表更改的数据
                     try
                     {
-                        tName = m_tabControl.SelectedTab.Text;
+                        tName = tabControl.SelectedTab.Text;
                         foreach (var m_index in m_dicEditIndex[tName])
                         {
                             var data = GetInsertDataFormat(m_dicTableTempData[tName].Rows[m_index[0]][m_index[1]]);
@@ -464,7 +473,7 @@ namespace _12SQLitelearning
                         TabPage tpp2;
                         try
                         {
-                            tpp2 = m_tabControl.SelectedTab;
+                            tpp2 = tabControl.SelectedTab;
                             dgv = (from Control d in tpp2.Controls where d is DataGridView select d).FirstOrDefault() as DataGridView;
                             tName = tpp2.Text;
                             var dicType = addForm.m_Type;
@@ -493,7 +502,7 @@ namespace _12SQLitelearning
                     string DeleteColName = "";
                     try
                     {
-                        tpp3 = m_tabControl.SelectedTab;
+                        tpp3 = tabControl.SelectedTab;
                         dgv = (from Control d in tpp3.Controls where d is DataGridView select d).FirstOrDefault() as DataGridView;
                         DeleteColName = dgv.CurrentCell.OwningColumn.HeaderCell.Value.ToString();
                         tName = tpp3.Text;
@@ -518,23 +527,22 @@ namespace _12SQLitelearning
             }
         }
 
-        public bool AddDBDataToTabControl(TabControl tabControl = null)
+        public bool AddDBDataToTabControl(Panel panel)
         {
             if (m_dicTableData == null)
                 return false;
             try
             {
-                if (tabControl != null)
+                if (panel != null)
                 {
-                    tabControl.TabPages.Clear();
-                    tabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
-                    m_tabControl = tabControl;
+                    panel.Controls.Clear();
+                    m_Panel = panel;
                 }
                 else
-                {
-                    if (m_tabControl.TabPages != null)
-                        m_tabControl.TabPages.Clear();
-                }
+                    throw new Exception("传参Panel为Null！");
+
+                LoadTabControlAndButton();
+
                 m_dicTableTempData.Clear();
                 m_dicTableTempData = QueryDBData();
                 foreach (var l in m_dicTableTempData.Values)
@@ -551,80 +559,59 @@ namespace _12SQLitelearning
             return true;
         }
 
+        private void LoadTabControlAndButton()
+        {
+            if (m_Panel == null)
+                return;
+            TabControl tabControl = new TabControl();
+            tabControl.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right);
+            tabControl.Location = new Point(3, 3);
+            tabControl.Name = "tabControl";
+            tabControl.Size = new Size(811, m_Panel.Height - 6);
+            tabControl.SelectedIndexChanged += TabControl_SelectedIndexChanged;
+
+            for (int i = 0; i < m_dicBtn.Count; i++)
+            {
+                Button btn = new Button();
+                btn.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+                btn.Location = new Point(m_Panel.Width - 102 - 6, 28 + (25 + 6) * i);
+                btn.Name = string.Format("{0}", m_dicBtn.ElementAt(i).Key[0]);
+                btn.Size = new Size(102, 25);
+                btn.Text = m_dicBtn.ElementAt(i).Key[1];
+                btn.UseVisualStyleBackColor = true;
+                btn.Click += m_dicBtn.ElementAt(i).Value;
+                m_Panel.Controls.Add(btn);
+            }
+            m_Panel.Controls.Add(tabControl);
+        }
+
         private void AddTabPageOfTableData(MyTableData tableData)
         {
             TabPage tp = new TabPage(tableData.m_tableName);
-            DataGridView dgv = new DataGridView();
-            m_tabControl.TabPages.Add(tp);
+            TabControl tabControl = (from Control d in m_Panel.Controls where d is TabControl select d).FirstOrDefault() as TabControl;
+            tabControl.TabPages.Add(tp);
+            LoadDataGridView(tp, tableData);
+        }
 
-            LoadButtonAndDataGridView(tp, ref dgv);
+        private void LoadDataGridView(TabPage tp, MyTableData tableData)
+        {
+            DataGridView dgv = new DataGridView(); ;
+            int tabWidth = tp.Size.Width;
+            int tabHeigth = tp.Size.Height;
 
-            //int tabWidth = tp.Size.Width;
-            //int tabHeigth = tp.Size.Height;
-
-            //Button btnCreateTable = new Button();
-            //btnCreateTable.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            //btnCreateTable.Location = new Point(tabWidth - 102 - 6, 6);
-            //btnCreateTable.Name = string.Format("btnCreatetable{0}", tableData.m_tableName);
-            //btnCreateTable.Size = new Size(102, 25);
-            //btnCreateTable.Text = "创建数据表";
-            //btnCreateTable.UseVisualStyleBackColor = true;
-            //btnCreateTable.Click += BtnCreateTable_Click;
-
-            //Button btnDeleteTable = new Button();
-            //btnDeleteTable.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            //btnDeleteTable.Location = new Point(tabWidth - 102 - 6, 6 + 25 + 6);
-            //btnDeleteTable.Name = string.Format("btnDeleteTable{0}", tableData.m_tableName);
-            //btnDeleteTable.Size = new Size(102, 25);
-            //btnDeleteTable.Text = "删除数据表";
-            //btnDeleteTable.UseVisualStyleBackColor = true;
-            //btnDeleteTable.Click += BtnDeleteTable_Click;
-
-            //Button btnDeleteRow = new Button();
-            //btnDeleteRow.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            //btnDeleteRow.Location = new Point(tabWidth - 102 - 6, 6 + (25 + 6) * 2);
-            //btnDeleteRow.Name = string.Format("btnDeleteRow{0}", tableData.m_tableName);
-            //btnDeleteRow.Size = new Size(102, 25);
-            //btnDeleteRow.Text = "删除行";
-            //btnDeleteRow.UseVisualStyleBackColor = true;
-            //btnDeleteRow.Click += BtnDeleteRow_Click;
-
-            //Button btnInsertData = new Button();
-            //btnInsertData.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            //btnInsertData.Location = new Point(tabWidth - 102 - 6, 6 + (25 + 6) * 3);
-            //btnInsertData.Name = string.Format("btnInsertData{0}", tableData.m_tableName);
-            //btnInsertData.Size = new Size(102, 25);
-            //btnInsertData.Text = "插入数据";
-            //btnInsertData.UseVisualStyleBackColor = true;
-            //btnInsertData.Click += btnInsertData_Click;
-
-            //Button btnUpdate = new Button();
-            //btnUpdate.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-            //btnUpdate.Location = new Point(tabWidth - 102 - 6, 6 + (25 + 6) * 4);
-            //btnUpdate.Name = string.Format("btnUpdate{0}", tableData.m_tableName);
-            //btnUpdate.Size = new Size(102, 25);
-            //btnUpdate.Text = "更新数据";
-            //btnUpdate.UseVisualStyleBackColor = true;
-            //btnUpdate.Click += BtnUpdate_Click;
-
-            //DataGridView dgv = new DataGridView();
-            //dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            //dgv.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right);
-            //dgv.Location = new Point(3, 3);
-            //dgv.Name = tableData.m_tableName;
-            //dgv.RowTemplate.Height = 27;
-            //dgv.Size = new Size(tabWidth - 3 - 102 - 6 * 2, tabHeigth - 3 * 2);
-            //dgv.AllowUserToAddRows = false;
-            //dgv.RowHeadersVisible = false;
-            //dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            //dgv.CellValueChanged += Dgv_CellValueChanged;
-
-            //tp.Controls.Add(dgv);
-            //tp.Controls.Add(btnCreateTable);
-            //tp.Controls.Add(btnDeleteTable);
-            //tp.Controls.Add(btnDeleteRow);
-            //tp.Controls.Add(btnInsertData);
-            //tp.Controls.Add(btnUpdate);
+            dgv = new DataGridView();
+            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgv.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+            dgv.Dock = DockStyle.Fill;
+            dgv.Location = new Point(3, 3);
+            dgv.Name = tp.Text;
+            dgv.RowTemplate.Height = 27;
+            dgv.Size = new Size(tabWidth - 6, tabHeigth - 3 * 2);
+            dgv.AllowUserToAddRows = false;
+            dgv.RowHeadersVisible = false;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv.CellValueChanged += Dgv_CellValueChanged;
+            tp.Controls.Add(dgv);
 
             foreach (var d in tableData.m_listColumnName)
             {
@@ -642,83 +629,16 @@ namespace _12SQLitelearning
             }
         }
 
-        public TabControl GetDBDataTabControl()
-        {
-            if (m_tabControl == null)
-                return null;
-            return m_tabControl;
-        }
-
-        private void LoadButtonAndDataGridView(TabPage tp, ref DataGridView dgv)
-        {
-            //dgv = new DataGridView();
-            int tabWidth = tp.Size.Width;
-            int tabHeigth = tp.Size.Height;
-            for (int i = 0; i < m_dicBtn.Count; i++)
-            {
-                Button btn = new Button();
-                btn.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
-                btn.Location = new Point(tabWidth - 102 - 6, 6 + (25 + 6) * i);
-                btn.Name = string.Format("{0}{1}", m_dicBtn.ElementAt(i).Key[0], tp.Text);
-                btn.Size = new Size(102, 25);
-                btn.Text = m_dicBtn.ElementAt(i).Key[1];
-                btn.UseVisualStyleBackColor = true;
-                btn.Click += m_dicBtn.ElementAt(i).Value;
-                tp.Controls.Add(btn);
-            }
-
-            dgv = new DataGridView();
-            dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgv.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right);
-            dgv.Location = new Point(3, 3);
-            dgv.Name = tp.Text;
-            dgv.RowTemplate.Height = 27;
-            dgv.Size = new Size(tabWidth - 3 - 102 - 6 * 2, tabHeigth - 3 * 2);
-            dgv.AllowUserToAddRows = false;
-            dgv.RowHeadersVisible = false;
-            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgv.CellValueChanged += Dgv_CellValueChanged;
-            tp.Controls.Add(dgv);
-        }
-
         private void TabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            m_TabControlSelectIndex = m_tabControl.SelectedIndex;
+            TabControl tabControl = (from Control d in m_Panel.Controls where d is TabControl select d).FirstOrDefault() as TabControl;
+            m_TabControlSelectIndex = tabControl.SelectedIndex;
         }
 
         private void BtnCreateTable_Click(object sender, EventArgs e)
         {
-            //string sql = "", tableName = "";
             lock (m_lock)
             {
-                //SQLiteDataAddForm addForm = new SQLiteDataAddForm(AddStep.CreateTable);
-                //if (addForm.ShowDialog() == DialogResult.OK)
-                //{
-                //    try
-                //    {
-                //        sql = addForm.m_sqlCreateTable.Sql;
-                //        tableName = addForm.m_sqlCreateTable.tableName;
-                //        SQLiteCommand command = new SQLiteCommand(sql, m_sqlConnection);
-                //        command.ExecuteNonQuery();
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        throw new Exception("创建数据表" + tableName + "失败：" + ex.Message);
-                //    }
-                //    MyTableData md = new MyTableData(tableName);
-                //    MyTableData md1 = new MyTableData(tableName);
-                //    md.m_listColumnName = (from s in addForm.m_sqlCreateTable.RowTemplate select s.Name).ToList();
-                //    md1.m_listColumnName = (from s in addForm.m_sqlCreateTable.RowTemplate select s.Name).ToList();
-                //    md.Rows.RowTemplate = new List<SQLiteRowData>(addForm.m_sqlCreateTable.RowTemplate);
-                //    md1.Rows.RowTemplate = new List<SQLiteRowData>(addForm.m_sqlCreateTable.RowTemplate);
-                //    m_dicTableTempData.Add(tableName, md);
-                //    m_dicTableData.Add(tableName, md1);
-                //    MessageBox.Show($"创建数据表{tableName}成功！");
-                //    AddTabPageOfTableData(md);
-                //    //QueryDBData(m_tabControl);
-                //    //m_tabControl.SelectedIndex = m_TabControlSelectIndex;
-                //}
-
                 var d = new Dictionary<string, MyTableData>();
                 SendSqliteCmd(SqliteCmd.createTable, ref d);
             }
@@ -744,30 +664,8 @@ namespace _12SQLitelearning
 
         private void BtnDeleteRow_Click(object sender, EventArgs e)
         {
-            //string tName = m_tabControl.SelectedTab.Text;
             lock (m_lock)
             {
-                //    DataGridView dgv = (from Control d in m_tabControl.SelectedTab.Controls where d is DataGridView select d).FirstOrDefault() as DataGridView;
-                //    int index = dgv.CurrentRow.Index;
-                //    var id = m_dicTableTempData[tName].Rows[index][0];
-                //    try
-                //    {
-                //        if (id.Name != "id")
-                //        {
-                //            throw new Exception($"表{tName}" + "不存在唯一ID");
-                //        }
-                //        string sql = "delete from " + tName + " where " + "ID = " + id.Value;
-                //        SQLiteCommand command = new SQLiteCommand(sql, m_sqlConnection);
-                //        command.ExecuteNonQuery();
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        throw new Exception("删除数据：" + tName + ": ID = null" + " 失败：" + ex.Message);
-                //    }
-                //    m_dicTableData[tName].Rows.RemoveAt(index);
-                //    m_dicTableTempData[tName].Rows.RemoveAt(index);
-                //    dgv.Rows.RemoveAt(index);
-                //    MessageBox.Show("删除数据：" + tName + ": ID = " + id.Value + " 成功！");
                 var d = new Dictionary<string, MyTableData>();
                 SendSqliteCmd(SqliteCmd.deleteRowData, ref d);
             }
@@ -775,55 +673,8 @@ namespace _12SQLitelearning
 
         private void btnInsertData_Click(object sender, EventArgs e)
         {
-            //string tName = m_tabControl.SelectedTab.Text;
-            //MyTableDataRowCollection AddRowCollection = new MyTableDataRowCollection();
             lock (m_lock)
             {
-                //var rowTemplate = m_dicTableTempData[tName].Rows.RowTemplate;
-                //SQLiteDataAddForm addForm = new SQLiteDataAddForm(AddStep.InsertRow, rowTemplate);
-                //if (addForm.ShowDialog() == DialogResult.OK)
-                //{
-                //try
-                //{
-                //    AddRowCollection = addForm.m_AddRowCollection;
-                //    foreach (var item in AddRowCollection)
-                //    {
-                //        string strName = "";
-                //        string strValue = "";
-                //        for (int i = 0; i < item.Count; i++)
-                //        {
-                //            //if (item[i].Name == "id")
-                //            //    continue;
-                //            strName += item[i].Name;
-                //            strValue += ("@" + item[i].Name);
-                //            if (i == item.Count - 1)
-                //                break;
-                //            strName += ",";
-                //            strValue += ",";
-                //        }
-                //        string sql = "insert into " + tName + string.Format(" ({0})", strName) + string.Format(" values ({0})", strValue);
-                //        SQLiteCommand command = new SQLiteCommand(sql, m_sqlConnection);
-                //        foreach (var dat in item)
-                //        {
-                //            //if (dat.Name == "id")
-                //            //    continue;
-                //            SQLiteParameter parameter = new SQLiteParameter("@" + dat.Name, dat.Value);
-                //            command.Parameters.Add(parameter);
-                //        }
-                //        command.ExecuteNonQuery();
-                //        m_dicTableData[tName].Rows.Add(item);
-                //        m_dicTableTempData[tName].Rows.Add(item);
-                //        DataGridView dgv = (from Control d in m_tabControl.SelectedTab.Controls where d is DataGridView select d).FirstOrDefault() as DataGridView;
-                //        dgv.Rows.Add((from s in item select s.Value).ToArray());
-                //    }
-
-                //}
-                //catch (Exception ex)
-                //{
-                //    throw new Exception($"表{tName} 插入数据失败：" + ex.Message);
-                //}
-                //MessageBox.Show($"表{tName} 插入数据成功！");
-                //}
                 var d = new Dictionary<string, MyTableData>();
                 SendSqliteCmd(SqliteCmd.insertRowData, ref d);
             }
@@ -831,36 +682,8 @@ namespace _12SQLitelearning
 
         private void BtnUpdate_Click(object sender, EventArgs e)
         {
-            //string tName = m_tabControl.SelectedTab.Text;
             lock (m_lock)
             {
-                //try
-                //{
-                //    //UPDATE table SET name = 'Texas' WHERE ID = 6;
-                //    foreach (var index in m_dicEditIndex[tName])
-                //    {
-                //        var data = GetInsertDataFormat(m_dicTableTempData[tName].Rows[index[0]][index[1]]);
-                //        var data0 = GetInsertDataFormat(m_dicTableData[tName].Rows[index[0]][index[1]]);
-                //        var id = m_dicTableTempData[tName].Rows[index[0]][0];
-                //        string sql = "";
-                //        if (id.Name != "id")
-                //        {
-                //            throw new Exception($"表{tName}" + "不存在唯一ID");
-                //            sql = string.Format("update {0} set {1} = {2} where {3} = {4}", tName, data.Name, data.Value, data.Name, data0.Value);
-                //        }
-                //        else
-                //            sql = string.Format("update {0} set {1} = {2} where id = {3}", tName, data.Name, data.Value, id.Value);
-                //        SQLiteCommand command = new SQLiteCommand(sql, m_sqlConnection);
-                //        command.ExecuteNonQuery();
-                //        Thread.Sleep(20);
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    throw new Exception($"表{tName} " + "更新数据失败：" + ex.Message);
-                //}
-                //m_dicEditIndex[tName].Clear();
-                //MessageBox.Show("Updated Successfully!");
                 var d = new Dictionary<string, MyTableData>();
                 SendSqliteCmd(SqliteCmd.updateTableData, ref d);
             }
@@ -888,15 +711,15 @@ namespace _12SQLitelearning
         {
             if (m_dicEditIndex == null)
                 return;
-            string tName = m_tabControl.SelectedTab.Text;
+            TabControl tabControl = (from Control d in m_Panel.Controls where d is TabControl select d).FirstOrDefault() as TabControl;
+            string tName = tabControl.SelectedTab.Text;
             lock (m_lock)
             {
                 int[] index = new int[] { e.RowIndex, e.ColumnIndex };
                 try
                 {
-                    DataGridView dgv = (from Control d in m_tabControl.SelectedTab.Controls where d is DataGridView select d).FirstOrDefault() as DataGridView;
+                    DataGridView dgv = (from Control d in tabControl.SelectedTab.Controls where d is DataGridView select d).FirstOrDefault() as DataGridView;
                     m_dicTableTempData[tName].Rows[e.RowIndex][e.ColumnIndex].Value = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                    //var x = m_dicTableData[tName].Rows[e.RowIndex][e.ColumnIndex].Value;
                     if (!m_dicEditIndex.Keys.Contains(tName))
                         m_dicEditIndex.Add(tName, new List<int[]>());
                     if (!m_dicEditIndex[tName].Contains(index))

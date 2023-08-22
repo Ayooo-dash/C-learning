@@ -81,6 +81,7 @@
     </Reference>
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -92,6 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassTool.cs" />
     <Compile Include="CsvOperationEx.cs" />
     <Compile Include="FileManagerForm.cs">
       <SubType>Form</SubType>
@@ -119,6 +121,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializerHelper.cs" />
     <Compile Include="SQLiteDBHelper.cs" />
     <Compile Include="SQLiteForm.cs">
       <SubType>Form</SubType>
@@ -126,6 +129,7 @@
     <Compile Include="SQLiteForm.Designer.cs">
       <DependentUpon>SQLiteForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TValue.cs" />
     <Compile Include="XMLForm.cs">
       <SubType>Form</SubType>
     </Compile>

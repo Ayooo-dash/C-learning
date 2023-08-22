@@ -53,7 +53,7 @@
             this.txtPort.Name = "txtPort";
             this.txtPort.Size = new System.Drawing.Size(85, 25);
             this.txtPort.TabIndex = 1;
-            this.txtPort.Text = "8080";
+            this.txtPort.Text = "10000";
             // 
             // btnStart
             // 

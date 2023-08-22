@@ -8,9 +8,6 @@ E:\GZY\LearningProject\Winforms\obj\Debug\Winforms.pdb
 E:\GZY\LearningProject\Winforms\bin\Debug\06GDI+Learning.exe
 E:\GZY\LearningProject\Winforms\bin\Debug\06GDI+Learning.pdb
 E:\GZY\LearningProject\Winforms\obj\Debug\Winforms.csprojResolveAssemblyReference.cache
-E:\GZY\LearningProject\Winforms\bin\Debug\03SocketLearning.exe
-E:\GZY\LearningProject\Winforms\bin\Debug\04SocketClientLearning.exe
-E:\GZY\LearningProject\Winforms\bin\Debug\10NoteBookLearning.exe
 E:\GZY\LearningProject\Winforms\bin\Debug\_07窗体飞行棋.exe
 E:\GZY\LearningProject\Winforms\bin\Debug\03SocketLearning.pdb
 E:\GZY\LearningProject\Winforms\bin\Debug\04SocketClientLearning.pdb
@@ -25,3 +22,6 @@ E:\GZY\LearningProject\Winforms\obj\Debug\Winforms.PicForm.resources
 E:\GZY\LearningProject\Winforms\obj\Debug\Winforms.MainForm.resources
 E:\GZY\LearningProject\Winforms\obj\Debug\Winforms.SQLiteForm.resources
 E:\GZY\LearningProject\Winforms\obj\Debug\Winforms.XMLForm.resources
+E:\GZY\LearningProject\Winforms\bin\Debug\03SocketLearning.exe
+E:\GZY\LearningProject\Winforms\bin\Debug\04SocketClientLearning.exe
+E:\GZY\LearningProject\Winforms\bin\Debug\10NoteBookLearning.exe

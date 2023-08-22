@@ -18,4 +18,3 @@ E:\GZY\LearningProject\07窗体飞行棋\obj\Debug\_07窗体飞行棋.Properties
 E:\GZY\LearningProject\07窗体飞行棋\obj\Debug\07窗体飞行棋.csproj.GenerateResource.Cache
 E:\GZY\LearningProject\07窗体飞行棋\obj\Debug\_07窗体飞行棋.exe
 E:\GZY\LearningProject\07窗体飞行棋\obj\Debug\_07窗体飞行棋.pdb
-E:\GZY\LearningProject\07窗体飞行棋\obj\Debug\07窗体飞行棋.csprojResolveAssemblyReference.cache
